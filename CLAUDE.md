@@ -14,13 +14,14 @@ Open `index.html` directly, or serve locally (e.g. `python3 -m http.server 8000`
 
 Three files, all logic in `game.js` (single script, `'use strict'`, global state, no modules):
 
-- `index.html` — fixed element IDs that `game.js` looks up at load (`board`, `next-canvas`, `score`, `lines`, `level`, `overlay`, `overlay-title`, `overlay-score`, `restart-btn`, `theme-toggle`). Renaming an ID breaks the script. Main canvas is 300×600 = `COLS*BLOCK` × `ROWS*BLOCK` (10×20, 30px); if these constants change, update the canvas attrs.
+- `index.html` — fixed element IDs that `game.js` looks up at load (`board`, `next-canvas`, `score`, `lines`, `level`, `overlay`, `overlay-title`, `overlay-score`, `restart-btn`, `theme-toggle`, `skin-select`). Renaming an ID breaks the script. Main canvas is 300×600 = `COLS*BLOCK` × `ROWS*BLOCK` (10×20, 30px); if these constants change, update the canvas attrs.
 - `style.css` — layout/theme only.
 - `game.js` — module-level mutable state (`board`, `current`, `next`, `score`, `lines`, `level`, `paused`, `gameOver`, `dropInterval`, ...) reset by `init()`.
 
 Game flow: `init()` → `spawn()` (promotes `next`, ends game if spawn collides) → `loop()` (rAF; accumulates `dt` into `dropAccum`, gravity step when `>= dropInterval`) → `lockPiece()` = `merge()` + `clearLines()` + `spawn()`.
 
 Details worth knowing:
+- Skins: `SKINS = { retro, neon, pastel, pixel }`, cada una con `colors[]` (índice 0 null) y `drawBlock(context, x, y, color, size, alpha)` (x,y en celdas); `skin` activa vía `applySkin()` (pone `data-skin` en `<html>`, persiste `localStorage['skin']`, redibuja). `drawBlock(context,x,y,colorIndex,size,alpha)` global delega en `skin`. `COLORS` = paleta de retro. Skin puede definir `gridColor`; fondo de canvas vía `--canvas-bg` (neon = negro). Selector `#skin-select`.
 - Piece types are indices 1–8 into `PIECES`/`COLORS` (index 0 = empty; 8 = "tuerca", 3×3 ring with empty center, challenge piece); the board stores the type index per cell, so colors come from `COLORS[cell]`.
 - Rotation is matrix rotate CW (`rotateCW`) with horizontal-only wall kicks `[0,-1,1,-2,2]` in `tryRotate`; no SRS, no CCW.
 - Scoring: `LINE_SCORES[cleared] * level`; soft drop +1/cell, hard drop +2/cell. Level = `floor(lines/10)+1`; `dropInterval = max(100, 1000-(level-1)*90)`.
