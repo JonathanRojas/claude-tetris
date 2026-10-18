@@ -76,7 +76,7 @@ const SKINS = {
       roundedRectPath(context, x * size + 2, y * size + 2, size - 4, size - 4, size * 0.28);
       context.fillStyle = color;
       context.fill();
-      context.strokeStyle = 'rgba(255,255,255,0.7)';
+      context.strokeStyle = 'rgba(80,80,110,0.45)';
       context.lineWidth = 1.5;
       context.stroke();
       context.globalAlpha = 1;
@@ -358,6 +358,7 @@ function init() {
 }
 
 document.addEventListener('keydown', e => {
+  if (e.target === skinSelect) return;
   if (e.code === 'KeyP') { togglePause(); return; }
   if (paused || gameOver) return;
   switch (e.code) {

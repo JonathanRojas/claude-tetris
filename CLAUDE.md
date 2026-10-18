@@ -14,7 +14,7 @@ Open `index.html` directly, or serve locally (e.g. `python3 -m http.server 8000`
 
 Three files, all logic in `game.js` (single script, `'use strict'`, global state, no modules):
 
-- `index.html` — fixed element IDs that `game.js` looks up at load (`board`, `next-canvas`, `score`, `lines`, `level`, `overlay`, `overlay-title`, `overlay-score`, `restart-btn`, `theme-toggle`). Renaming an ID breaks the script. Main canvas is 300×600 = `COLS*BLOCK` × `ROWS*BLOCK` (10×20, 30px); if these constants change, update the canvas attrs.
+- `index.html` — fixed element IDs that `game.js` looks up at load (`board`, `next-canvas`, `score`, `lines`, `level`, `overlay`, `overlay-title`, `overlay-score`, `restart-btn`, `theme-toggle`, `skin-select`). Renaming an ID breaks the script. Main canvas is 300×600 = `COLS*BLOCK` × `ROWS*BLOCK` (10×20, 30px); if these constants change, update the canvas attrs.
 - `style.css` — layout/theme only.
 - `game.js` — module-level mutable state (`board`, `current`, `next`, `score`, `lines`, `level`, `paused`, `gameOver`, `dropInterval`, ...) reset by `init()`.
 
