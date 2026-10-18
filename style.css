@@ -15,6 +15,7 @@
   --overlay-bg: rgba(10, 10, 20, 0.75);
   --danger: #e57373;
   --shadow: rgba(0, 0, 0, 0.6);
+  --canvas-bg: var(--panel-bg);
 }
 
 [data-theme="light"] {
@@ -222,5 +223,30 @@ kbd {
 }
 
 #theme-toggle:hover {
+  border-color: var(--accent);
+}
+
+/* ---- Skins ---- */
+[data-skin="neon"] {
+  --canvas-bg: #000;
+}
+
+#board,
+#next-canvas {
+  background: var(--canvas-bg);
+}
+
+#skin-select {
+  background: var(--panel-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 6px 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#skin-select:hover,
+#skin-select:focus-visible {
   border-color: var(--accent);
 }

@@ -21,6 +21,7 @@ Three files, all logic in `game.js` (single script, `'use strict'`, global state
 Game flow: `init()` → `spawn()` (promotes `next`, ends game if spawn collides) → `loop()` (rAF; accumulates `dt` into `dropAccum`, gravity step when `>= dropInterval`) → `lockPiece()` = `merge()` + `clearLines()` + `spawn()`.
 
 Details worth knowing:
+- Skins: `SKINS = { retro, neon, pastel, pixel }`, cada una con `colors[]` (índice 0 null) y `drawBlock(context, x, y, color, size, alpha)` (x,y en celdas); `skin` activa vía `applySkin()` (pone `data-skin` en `<html>`, persiste `localStorage['skin']`, redibuja). `drawBlock(context,x,y,colorIndex,size,alpha)` global delega en `skin`. `COLORS` = paleta de retro. Skin puede definir `gridColor`; fondo de canvas vía `--canvas-bg` (neon = negro). Selector `#skin-select`.
 - Piece types are indices 1–8 into `PIECES`/`COLORS` (index 0 = empty; 8 = "tuerca", 3×3 ring with empty center, challenge piece); the board stores the type index per cell, so colors come from `COLORS[cell]`.
 - Rotation is matrix rotate CW (`rotateCW`) with horizontal-only wall kicks `[0,-1,1,-2,2]` in `tryRotate`; no SRS, no CCW.
 - Scoring: `LINE_SCORES[cleared] * level`; soft drop +1/cell, hard drop +2/cell. Level = `floor(lines/10)+1`; `dropInterval = max(100, 1000-(level-1)*90)`.
