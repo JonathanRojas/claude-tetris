@@ -52,6 +52,25 @@
         <button id="restart-btn">Reiniciar</button>
       </div>
     </div>
+
+    <div id="pause-menu" class="overlay hidden" tabindex="-1" role="dialog" aria-label="Menú de pausa">
+      <div class="overlay-box">
+        <p id="pause-title">PAUSA</p>
+        <button type="button" id="resume-btn" class="menu-btn">Reanudar</button>
+        <button type="button" id="pause-restart-btn" class="menu-btn">Reiniciar</button>
+        <button type="button" id="controls-btn" class="menu-btn" aria-expanded="false" aria-controls="pause-controls">Ver controles</button>
+        <ul id="pause-controls" class="hidden">
+          <li><kbd>←</kbd><kbd>→</kbd> mover</li>
+          <li><kbd>↑</kbd> / <kbd>X</kbd> rotar</li>
+          <li><kbd>↓</kbd> bajar</li>
+          <li><kbd>Space</kbd> caída</li>
+          <li><kbd>P</kbd> / <kbd>Esc</kbd> pausa</li>
+        </ul>
+        <label class="start-level">Nivel inicial
+          <select id="start-level"></select>
+        </label>
+      </div>
+    </div>
   </div>
 
   <script src="game.js"></script>

@@ -28,3 +28,4 @@ Details worth knowing:
 - Ghost piece is drawn via `ghostY()` with alpha 0.2; `drawBlock` is shared by the main and next-piece canvases.
 - Theming: colors in `style.css` are CSS variables (`:root` = dark, `[data-theme="light"]` overrides). `applyTheme()` sets `data-theme` on `<html>`, caches `--grid` into `gridColor` for `drawGrid()`, and redraws (loop is cancelled when paused/game over). Choice persisted in `localStorage['theme']`; default dark.
 - Piece spawn uses `Math.random()` per piece over all `PIECES` (no 7-bag).
+- Pause menu: `P`/`Escape` toggle `#pause-menu` (own overlay, separate from `#overlay`, which is Game Over only). While `paused`, keydown only handles P/Escape; native Tab/Enter/Space act on menu buttons. Resume blurs the focused element and sets `ignoreRepeat` so held keys are ignored until a fresh keydown. Start level (1–10) in `localStorage['startLevel']` → `startLevel`, used by `init()` and as the floor in `clearLines`.
