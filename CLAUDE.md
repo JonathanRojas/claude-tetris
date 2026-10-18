@@ -18,7 +18,7 @@ Three files, all logic in `game.js` (single script, `'use strict'`, global state
 - `style.css` — layout/theme only.
 - `game.js` — module-level mutable state (`board`, `current`, `next`, `score`, `lines`, `level`, `paused`, `gameOver`, `dropInterval`, ...) reset by `init()`.
 
-Game flow: `init()` → `spawn()` (promotes `next`, ends game if spawn collides) → `loop()` (rAF; accumulates `dt` into `dropAccum`, gravity step when `>= dropInterval`) → `lockPiece()` = `merge()` + `clearLines()` + `spawn()`.
+Game flow: carga → pantalla de inicio `#start-screen` (tabla de records + botón Jugar) → `init()` (ya NO se llama al cargar; lo dispara `#play-btn`/`#restart-btn`) → `spawn()` (promotes `next`, ends game if spawn collides) → `loop()` (rAF; accumulates `dt` into `dropAccum`, gravity step when `>= dropInterval`) → `lockPiece()` = `merge()` + `clearLines()` + `spawn()`.
 
 Details worth knowing:
 - Piece types are indices 1–8 into `PIECES`/`COLORS` (index 0 = empty; 8 = "tuerca", 3×3 ring with empty center, challenge piece); the board stores the type index per cell, so colors come from `COLORS[cell]`.
@@ -28,3 +28,4 @@ Details worth knowing:
 - Ghost piece is drawn via `ghostY()` with alpha 0.2; `drawBlock` is shared by the main and next-piece canvases.
 - Theming: colors in `style.css` are CSS variables (`:root` = dark, `[data-theme="light"]` overrides). `applyTheme()` sets `data-theme` on `<html>`, caches `--grid` into `gridColor` for `drawGrid()`, and redraws (loop is cancelled when paused/game over). Choice persisted in `localStorage['theme']`; default dark.
 - Piece spawn uses `Math.random()` per piece over all `PIECES` (no 7-bag).
+- Records: `localStorage['records']` (top 5 `{name,score,lines,level,date}`) y `['recordStats']` (`{bestCombo,maxLines}`), siempre con try/catch. `combo` = locks consecutivos que limpian líneas (`maxCombo` por partida, reset en `init()`). `endGame()` → `showGameOverRecords()` muestra input de nombre si entra en top 5. El handler de teclado ignora eventos de `<input>` y mientras `running` es false. Nombres se renderizan con `textContent`.
