@@ -90,6 +90,12 @@ Después abre `http://localhost:8000` en el navegador.
 
 ---
 
+## Tabla de records
+
+- Pantalla de inicio con el top 5 local, mejor combo y líneas máximas; el juego empieza con el botón "Jugar".
+- Al terminar la partida, si entras en el top 5 puedes escribir tu nombre (máx. 10 caracteres) y guardarlo; tu fila se resalta.
+- Se guarda en `localStorage` (`records` y `recordStats`). El botón "Borrar records" los elimina (pide confirmación).
+
 ## Cómo funciona
 
 El juego se compone de tres archivos que cooperan:
