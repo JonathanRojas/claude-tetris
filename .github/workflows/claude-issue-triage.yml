@@ -53,7 +53,9 @@ jobs:
                - Área (crea igual si faltan): area:gameplay, area:controls, area:scoring, area:ui, area:rendering.
                Aplica con `gh issue edit ${{ github.event.issue.number }} --add-label ...`.
                Si el evento es "edited", quita con `--remove-label` los labels de tipo/prioridad/área que ya no apliquen; no toques otros labels.
-            4. Publica UN comentario de diagnóstico que empiece con la línea `<!-- claude-triage -->` y contenga:
+            4. Publica UN comentario de diagnóstico que empiece con la línea `<!-- claude-triage -->`.
+               El comentario DEBE estar en formato Markdown compatible con GitHub (GFM): encabezados, listas, negritas, bloques de código con lenguaje (```js), referencias `archivo:línea` en backticks y listas de tareas `- [ ]` para los criterios de aceptación.
+               Debe contener:
                - **Resumen** del problema
                - **Clasificación**: tipo, prioridad, área y justificación breve
                - **Análisis técnico**: causa probable, archivos/funciones implicados (`game.js:línea`)
